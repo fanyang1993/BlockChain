@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>fading window</title>
+    <style>
+        .black_overlay{
+            display: none;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index:1001;
+            -moz-opacity: 0.8;
+            opacity:.80;
+            filter: alpha(opacity=88);
+        }
+        .white_content {
+            display: none;
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            width: 55%;
+            height: 55%;
+            padding: 20px;
+            border: 10px solid orange;
+            background-color: white;
+            z-index:1002;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'> </script>
+    <div id="main" align="center">
+
+        <img src="map.jpg" alt="Map" id="image_map" style="position: absolute;left: 270px;top: 20px"  >
+
+    </div>
+    <!--func1_Parking-->
+     <a href = "JavaScript:void(0)" style="position: absolute;left: 400px;top: 120px " onclick = "document.getElementById('func1_on').style.display='block';document.getElementById('func1_off').style.display='block'">Parking Service</a>
+    <div id="func1_on" class="white_content">
+        <h2>Packing</h2>
+        Name: <br><input type="text" id="name_func1"><br>
+        Payment:<br><input type="text" id="amount_func1"><br>
+        <button id="button_func1" >Park & Pay</button>
+        <script>
+
+            $(document).ready(function(){
+                $("button#button_func1").click(function(){
+
+                    var json =
+                    {
+                        "jsonrpc": "2.0",
+                        "method": "invoke",
+                        "params": {
+                            "type": 1,
+                            "chaincodeID": {
+                                "name": "5078ced08aaf2b64718ccdf705b6f32f08b629f99ba77472757b49594b20955d6b8d441764567a3dd12de085da899426a45b3b0a2cb93d81df6e404ceca6c1ff"
+                            },
+                            "ctorMsg": {
+                                "function": "write",
+                                "args": [
+                                    document.getElementById("name_func1").value,"parking_service",document.getElementById("amount_func1").value                                ]
+                            },
+                            "secureContext": "user_type1_0"
+                        },
+                        "id": 2
+                    };
+                    $.ajax({
+                        type: "POST",
+                        //peer url(found in bluxmix peer)
+                        url: "https://36c591183e7a4d3aad72788dea9dcaa9-vp0.us.blockchain.ibm.com:5004/chaincode",
+                        contentType: "application/json", //必须有
+                        dataType: "json", //type of return value
+                        data: JSON.stringify(json),
+                        success: function (response,tag) {
+                            alert(tag);
+
+                        }
+                    });
+
+                });
+            });
+
+        </script>
+    <a href = "javascript:void(0)" onclick = "document.getElementById('func1_on').style.display='none';document.getElementById('func1_off').style.display='none'">close</a></div>
+    <div id="func1_off" class="black_overlay"></div>
+    <!--func2_Washing-->
+     <a href = "JavaScript:void(0)" style="position: absolute;left: 630px;top: 120px " onclick = "document.getElementById('func2_on').style.display='block';document.getElementById('func2_off').style.display='block'">Washing Service</a>
+    <div id="func2_on" class="white_content">
+        <h2>Washing</h2>
+        Name: <br><input type="text" id="name_func2"><br>
+        Payment:<br><input type="text" id="amount_func2"><br>
+        <button id="button_func2" >Wash & Pay</button>
+        <script>
+
+            $(document).ready(function(){
+                $("button#button_func2").click(function(){
+
+                    var json =
+                    {
+                        "jsonrpc": "2.0",
+                        "method": "invoke",
+                        "params": {
+                            "type": 1,
+                            "chaincodeID": {
+                                "name": "5078ced08aaf2b64718ccdf705b6f32f08b629f99ba77472757b49594b20955d6b8d441764567a3dd12de085da899426a45b3b0a2cb93d81df6e404ceca6c1ff"
+                            },
+                            "ctorMsg": {
+                                "function": "write",
+                                "args": [
+                                    document.getElementById("name_func2").value,"washing_service",document.getElementById("amount_func2").value                                ]
+                            },
+                            "secureContext": "user_type1_0"
+                        },
+                        "id": 2
+                    };
+                    $.ajax({
+                        type: "POST",
+                        //peer url(found in bluxmix peer)
+                        url: "https://36c591183e7a4d3aad72788dea9dcaa9-vp0.us.blockchain.ibm.com:5004/chaincode",
+                        contentType: "application/json", //必须有
+                        dataType: "json", //type of return value
+                        data: JSON.stringify(json),
+                        success: function (response,tag) {
+                            alert(tag);
+
+                        }
+                    });
+
+                });
+            });
+
+        </script>
+        <a href = "javascript:void(0)" onclick = "document.getElementById('func2_on').style.display='none';document.getElementById('func2_off').style.display='none'">close</a></div>
+    <div id="func2_off" class="black_overlay"></div>
+    <!--func3-->
+    <a href = "JavaScript:void(0)" style="position: absolute;left: 850px;top: 120px " onclick = "document.getElementById('func3_on').style.display='block';document.getElementById('func3_off').style.display='block'">func3_click</a>
+    <div id="func3_on" class="white_content">
+        Nothing3
+        <a href = "javascript:void(0)" onclick = "document.getElementById('func3_on').style.display='none';document.getElementById('func3_off').style.display='none'">close</a></div>
+    <div id="func3_off" class="black_overlay"></div>
+    <!--func_query-->
+    <a href = "JavaScript:void(0)" style="position: absolute;left: 130px;top: 50px " onclick = "document.getElementById('funcq_on').style.display='block';document.getElementById('funcq_off').style.display='block'">Query</a>
+    <div id="funcq_on" class="white_content">
+        <h2>Query</h2>
+        Name: <br>
+        <input id="name_query" type="text"><br>
+        Amount: <br>
+        <input id="amount_query" type="text" readonly><br>
+        <button id="button_query">submit</button>
+        <script>
+
+            $(document).ready(function(){
+                $("button#button_query").click(function(){
+
+                    var json =
+                    {
+                        "jsonrpc": "2.0",
+                        "method": "query",
+                        "params": {
+                            "type": 1,
+                            "chaincodeID": {
+                                "name": "5078ced08aaf2b64718ccdf705b6f32f08b629f99ba77472757b49594b20955d6b8d441764567a3dd12de085da899426a45b3b0a2cb93d81df6e404ceca6c1ff"
+                            },
+                            "ctorMsg": {
+                                "function": "query",
+                                "args": [
+                                    document.getElementById("name_query").value
+                                ]
+                            },
+                            "secureContext": "user_type1_0"
+                        },
+                        "id": 1
+                    };
+                    $.ajax({
+                        type: "POST",
+                        //peer url(found in bluxmix peer)
+                        url: "https://36c591183e7a4d3aad72788dea9dcaa9-vp0.us.blockchain.ibm.com:5004/chaincode",
+                        contentType: "application/json", //必须有
+                        dataType: "json", //type of return value
+                        data: JSON.stringify(json),
+                        success: function (response,tag) {
+                            alert(response.result.message);
+                            document.getElementById("amount_query").value = response.result.message;
+                        }
+                    });
+
+                });
+            });
+
+        </script>
+        <a href = "javascript:void(0)" onclick = "document.getElementById('funcq_on').style.display='none';document.getElementById('funcq_off').style.display='none'">close</a></div>
+    <div id="funcq_off" class="black_overlay"></div>
+
+    <!--func_transfer-->
+    <a href = "JavaScript:void(0)" style="position: absolute;left: 130px;top: 70px " onclick = "document.getElementById('functrans_on').style.display='block';document.getElementById('functrans_off').style.display='block'">Transfer_test</a>
+    <div id="functrans_on" class="white_content">
+        <h2>Transfer</h2>
+        From(Name):
+        <input type="text" id="name_trans_from">
+        To(Name):
+        <input type="text" id="name_trans_to"><br>
+        Amount:<br>
+        <input id="amount_transfer" type="text"><br>
+        <button id="button_transfer">submit</button>
+        <script>
+
+            $(document).ready(function(){
+                $("button#button_transfer").click(function(){
+
+                    var json =
+                    {
+                        "jsonrpc": "2.0",
+                        "method": "invoke",
+                        "params": {
+                            "type": 1,
+                            "chaincodeID": {
+                                "name": "5078ced08aaf2b64718ccdf705b6f32f08b629f99ba77472757b49594b20955d6b8d441764567a3dd12de085da899426a45b3b0a2cb93d81df6e404ceca6c1ff"
+                            },
+                            "ctorMsg": {
+                                "function": "write",
+                                "args": [
+                                    document.getElementById("name_trans_from").value,document.getElementById("name_trans_to").value,document.getElementById("amount_transfer").value
+                                ]
+                            },
+                            "secureContext": "user_type1_0"
+                        },
+                        "id": 2
+                    };
+                    $.ajax({
+                        type: "POST",
+                        //peer url(found in bluxmix peer)
+                        url: "https://36c591183e7a4d3aad72788dea9dcaa9-vp0.us.blockchain.ibm.com:5004/chaincode",
+                        contentType: "application/json", //必须有
+                        dataType: "json", //type of return value
+                        data: JSON.stringify(json),
+                        success: function (response,tag) {
+                            alert(tag);
+                        }
+                    });
+
+                });
+            });
+
+        </script>
+
+        <a href = "javascript:void(0)" onclick = "document.getElementById('functrans_on').style.display='none';document.getElementById('functrans_off').style.display='none'">close</a></div>
+    <div id="functrans_off" class="black_overlay"></div>
+
+    <!--func_adduser-->
+    <a href = "JavaScript:void(0)" style="position: absolute;left: 130px;top: 90px " onclick = "document.getElementById('funcadduser_on').style.display='block';document.getElementById('funcadduser_off').style.display='block'">Add User</a>
+    <div id="funcadduser_on" class="white_content">
+        <h2>Add User</h2>
+        Name: <br>
+        <input type="text" id="name_adduser"><br>
+        Amount:<br>
+        <input type="text" id="amount_adduser"><br>
+        <button id="button_adduser">add</button>
+        <script>
+
+            $(document).ready(function(){
+                $("button#button_adduser").click(function(){
+
+                    var json =
+                    {
+                        "jsonrpc": "2.0",
+                        "method": "invoke",
+                        "params": {
+                            "type": 1,
+                            "chaincodeID": {
+                                "name": "5078ced08aaf2b64718ccdf705b6f32f08b629f99ba77472757b49594b20955d6b8d441764567a3dd12de085da899426a45b3b0a2cb93d81df6e404ceca6c1ff"
+                            },
+                            "ctorMsg": {
+                                "function": "add",
+                                "args": [
+                                    document.getElementById("name_adduser").value,document.getElementById("amount_adduser").value
+                                ]
+                            },
+                            "secureContext": "user_type1_0"
+                        },
+                        "id": 2
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        //peer url(found in bluxmix peer)
+                        url: "https://36c591183e7a4d3aad72788dea9dcaa9-vp0.us.blockchain.ibm.com:5004/chaincode",
+                        contentType: "application/json", //必须有
+                        dataType: "json", //type of return value
+                        data: JSON.stringify(json),
+                        success: function (response,tag) {
+                            alert(tag);
+                        }
+                    });
+
+                });
+            });
+
+        </script>
+        <a href = "javascript:void(0)" onclick = "document.getElementById('funcadduser_on').style.display='none';document.getElementById('funcadduser_off').style.display='none'">close</a></div>
+    <div id="funcadduser_off" class="black_overlay"></div>
+
+
+    <!--func_overall-->
+    <a href = "JavaScript:void(0)" style="position: absolute;left: 130px;top: 30px " onclick = "document.getElementById('func_on').style.display='block';document.getElementById('func_off').style.display='block'">Show All Accounts</a>
+    <div id="func_on" class="white_content">
+        <h2>Overall</h2>
+        <a href = "javascript:void(0)" onclick = "document.getElementById('func_on').style.display='none';document.getElementById('func_off').style.display='none'">close</a></div>
+    <div id="func_off" class="black_overlay"></div>
+
+
+</body>
+</html>
